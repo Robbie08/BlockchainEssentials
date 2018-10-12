@@ -25,9 +25,32 @@ public class Block {
 //
 //		#####################
 //		### ADD CODE HERE ###
+//		### 90% Approach  ###
 //		#####################
 
-        return "" ; // this will change when the time comes
+//      ### Finish first then do the 100% approach ###
+
+        // Create Merkle Node Projects
+        MerkleNode oNode0 = new MerkleNode();
+        MerkleNode oNode1 = new MerkleNode();
+        MerkleNode oNode2 = new MerkleNode();
+        MerkleNode oNode3 = new MerkleNode();
+        MerkleNode oNode4 = new MerkleNode();
+        MerkleNode oNode5 = new MerkleNode();
+        MerkleNode oNode6 = new MerkleNode();
+
+        // Create leaves of tree with hashes of inputs
+        oNode0.sHash = BlockchainUtil.generateHash(lstItems.get(0));
+        oNode1.sHash = BlockchainUtil.generateHash(lstItems.get(1));
+        oNode2.sHash = BlockchainUtil.generateHash(lstItems.get(2));
+        oNode3.sHash = BlockchainUtil.generateHash(lstItems.get(3));
+
+        // Begin creating upper levels of tree
+        populateMerkleNode(oNode4,oNode0,oNode1);
+        populateMerkleNode(oNode5,oNode2,oNode3);
+        populateMerkleNode(oNode6,oNode4,oNode5);
+
+        return oNode6.sHash; //this is the Merkle Root
 
     }
 
@@ -43,8 +66,12 @@ public class Block {
 
 
 //		#####################
-//		### ADD CODE HERE ###
+//		### CODE HERE     ###
 //		#####################
+
+        oNode.oLeft = oLeftNode;
+        oNode.oRight = oRightNode;
+        oNode.sHash = BlockchainUtil.generateHash(oLeftNode.sHash + oRightNode.sHash); //create the next node
 
     }
 
