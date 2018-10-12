@@ -15,10 +15,26 @@ public class BlockchainUtil {
     public static synchronized String generateHash(String sOriginal){
 
 //		#####################
-//		### ADD CODE HERE ###
+//		### CODE HERE     ###
 //		#####################
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] btEncodedhash = digest.digest(
+                    sOriginal.getBytes(StandardCharsets.UTF_8));
 
-        return ""; // This will change when the time comes
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < btEncodedhash.length; i++) {
+                //0xff is telling it's going to be a hex number
+                sb.append(Integer.toString((btEncodedhash[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            return sb.toString();
+        }
+        catch(Exception ex){
+
+            System.out.println("Error generating hash: " + ex.getMessage());
+            return null;
+        }
     }
 
 

@@ -24,10 +24,11 @@ public class Miner implements Runnable{
     public boolean doProofOfWork(Block oBlock) {
 
 //		#####################
-//		### ADD CODE HERE ###
+//		###  CODE HERE    ###
 //		#####################
 
-        return true; // this will change when the time comes
+
+        return false;
     }
 
 
