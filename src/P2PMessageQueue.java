@@ -1,3 +1,5 @@
+import org.w3c.dom.Node;
+
 /**
  * This Queue maintains the queue of messages coming from connected clients.
  */
@@ -16,6 +18,18 @@ public class P2PMessageQueue {
 //		#####################
 //		### ADD CODE HERE ###
 //		#####################
+
+        // validate if the queue is empty
+        if(hasNodes()){
+            // if the queue is empty
+            this.head = this.tail = oMessage;
+            return;
+        }
+
+        // add the new node to the start of the queue
+        this.tail.next = oMessage;
+        this.tail = oMessage;
+
     }
 
 
@@ -26,10 +40,24 @@ public class P2PMessageQueue {
     public synchronized P2PMessage dequeue(){
 
 //		#####################
-//		### ADD CODE HERE ###
+//		###  CODE HERE    ###
 //		#####################
 
-        return new P2PMessage(); // this will be changed when the time comes
+        // validation for queue
+        if(hasNodes()){
+            System.out.println("[queue] No messages in queue.");
+            return null;
+        }
+
+        // store the previous head node and move it up one step
+        P2PMessage oTemp = this.head;
+        this.head = this.head.next;
+
+        // If the head becomes null then the tail must also be null right?
+        if(this.head == null){
+            this.tail = null;
+        }
+        return oTemp; // return our dequeued node/message
 
     }
 
@@ -39,8 +67,15 @@ public class P2PMessageQueue {
 //		#####################
 //		### ADD CODE HERE ###
 //		#####################
+        boolean bFlag = true;
 
-        return true; // this will change when the time comes
+        if(this.tail == null)
+            bFlag = false;
+
+        else if(this.head == null)
+            bFlag = false;
+
+        return bFlag; // will return the boolean checking if the node is null or not
     }
 }
 

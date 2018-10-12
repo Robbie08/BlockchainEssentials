@@ -26,7 +26,7 @@ public class Miner implements Runnable{
 //		#####################
 //		###  CODE HERE    ###
 //		#####################
-
+        
 
         return false;
     }
