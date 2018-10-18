@@ -26,7 +26,21 @@ public class Miner implements Runnable{
 //		#####################
 //		###  CODE HERE    ###
 //		#####################
-        
+
+        String[] proofDifficulty  = new String[oBlock.getDifficulty()]; // create the array
+
+        // populate array with leading zeros
+        int i = 0;
+        while(proofDifficulty.length < oBlock.getDifficulty()){
+            // add the leading zeros
+            proofDifficulty[i] = "0;";
+            i++;
+        }
+
+        // create the loop that will look for the valid nonce
+
+
+
 
         return false;
     }

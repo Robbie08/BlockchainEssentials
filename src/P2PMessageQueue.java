@@ -1,5 +1,3 @@
-import org.w3c.dom.Node;
-
 /**
  * This Queue maintains the queue of messages coming from connected clients.
  */
