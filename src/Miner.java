@@ -27,22 +27,43 @@ public class Miner implements Runnable{
 //		###  CODE HERE    ###
 //		#####################
 
-        String[] proofDifficulty  = new String[oBlock.getDifficulty()]; // create the array
-
-        // populate array with leading zeros
-        int i = 0;
-        while(proofDifficulty.length < oBlock.getDifficulty()){
-            // add the leading zeros
-            proofDifficulty[i] = "0;";
-            i++;
+        String sDifficulty =""; // create the array
+        if(sDifficulty.isEmpty()){
+            while(sDifficulty.length() < oBlock.getDifficulty()){
+                sDifficulty = "0"+sDifficulty;
+            }
         }
 
+
+
+        int counter = 0;
         // create the loop that will look for the valid nonce
+        while(true){
+            // check if the block has been mined
+            if(bAbortPoW){
+                // if someone has mined the block
+                bAbortPoW = false;
+                System.out.println("[miner] : This block has been mined by another machine");
+                return false;
+
+            }
+            else{
+                // if someone has not mined the block yet!
+                //The nonce should start at 0 before the while loop and increment
+                oBlock.setNonce(String.valueOf(counter));
+                oBlock.computeHash();
+               if(oBlock.getNonce().startsWith(sDifficulty)){
+
+               }
+
+            }
+
+            counter++;
+        }
 
 
 
-
-        return false;
+        //return false;
     }
 
 
