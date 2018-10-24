@@ -53,7 +53,7 @@ public class Miner implements Runnable{
                 oBlock.setNonce(String.valueOf(counter));
                 oBlock.computeHash();
                if(oBlock.getNonce().startsWith(sDifficulty)){
-
+                    return true; // if the user has solved the block and is not mined
                }
 
             }

@@ -31,42 +31,51 @@ public class Block {
 //      ### Finish first then do the 100% approach ###
 
 
-        //Generate merkle node for n values
-        for(int i = 0; i < lstItems.size(); i++){
+        // S(n) = 2^n
 
-            MerkleNode oNodeTemp1 = new MerkleNode();
-            MerkleNode oNodeTemp2 = new MerkleNode();
+//        ArrayList<String> tempList = new ArrayList<>(); // for our hashes based on size
+//
+//        //Generate merkle node for n values
+//        for(int i = 0; i < lstItems.size(); i++){
+//
+//            tempList.add(BlockchainUtil.generateHash(lstItems.get(i))); // generating our hash for the n'th value)
+//
+//        }
 
-            BlockchainUtil.generateHash(lstItems.get(i)); // generating our hash for the n'th value
-            BlockchainUtil.generateHash(lstItems.get(i+1)); // generating our hash for n+1'th value
-
-
-
-        }
         // Create Merkle Node Projects
-        MerkleNode oNode0 = new MerkleNode();
-        MerkleNode oNode1 = new MerkleNode();
-        MerkleNode oNode2 = new MerkleNode();
-        MerkleNode oNode3 = new MerkleNode();
+        MerkleNode oNodeLeaf0 = new MerkleNode();
+        MerkleNode oNodeLeaf1 = new MerkleNode();
         MerkleNode oNode4 = new MerkleNode();
-        MerkleNode oNode5 = new MerkleNode();
-        MerkleNode oNode6 = new MerkleNode();
+        MerkleNode oMerkleNode = new MerkleNode();
 
         // Create leaves of tree with hashes of inputs
-        oNode0.sHash = BlockchainUtil.generateHash(lstItems.get(0));
-        oNode1.sHash = BlockchainUtil.generateHash(lstItems.get(1));
-        oNode2.sHash = BlockchainUtil.generateHash(lstItems.get(2));
-        oNode3.sHash = BlockchainUtil.generateHash(lstItems.get(3));
+        oNodeLeaf0.sHash = BlockchainUtil.generateHash(lstItems.get(0));
+        oNodeLeaf1.sHash = BlockchainUtil.generateHash(lstItems.get(1));
 
-        // Begin creating upper levels of tree
-        populateMerkleNode(oNode4,oNode0,oNode1);
-        populateMerkleNode(oNode5,oNode2,oNode3);
-        populateMerkleNode(oNode6,oNode4,oNode5);
+        if(lstItems.size() == 2){
+            // case if two items
+            populateMerkleNode(oMerkleNode,oNodeLeaf0,oNodeLeaf1); // calculate merkle node
+
+        }
+        else if(lstItems.size() == 4){
+            // case if there is 4 items
+            MerkleNode oNodeLeaf2 = new MerkleNode();
+            MerkleNode oNodeLeaf3 = new MerkleNode();
+            MerkleNode oNode5 = new MerkleNode();
+
+
+            oNodeLeaf2.sHash = BlockchainUtil.generateHash(lstItems.get(2));
+            oNodeLeaf3.sHash = BlockchainUtil.generateHash(lstItems.get(3));
+
+            populateMerkleNode(oNode4,oNodeLeaf0,oNodeLeaf1);
+            populateMerkleNode(oNode5,oNodeLeaf2,oNodeLeaf3);
+            populateMerkleNode(oMerkleNode,oNode4,oNode5); // calculate merkle node
+
+        }
 
 
 
-        return oNode6.sHash; //this is the Merkle Root
-
+        return oMerkleNode.sHash; //this is the Merkle Root
     }
 
 
@@ -148,21 +157,21 @@ public class Block {
         lstItems.add("t2");
 
 
-//        // *** BEGIN TEST 2 ITEMS ***
-//
-//        sMerkleRoot = oBlock.computeMerkleRoot(lstItems);
-//
-//        if(sMerkleRoot.equals(sExpectedMerkleRoot_2Items)){
-//
-//            System.out.println("Merkle root method for 2 items worked!");
-//        }
-//
-//        else{
-//            System.out.println("Merkle root method for 2 items failed!");
-//            System.out.println("Expected: " + sExpectedMerkleRoot_2Items);
-//            System.out.println("Received: " + sMerkleRoot);
-//
-//        }
+        // *** BEGIN TEST 2 ITEMS ***
+
+        sMerkleRoot = oBlock.computeMerkleRoot(lstItems);
+
+        if(sMerkleRoot.equals(sExpectedMerkleRoot_2Items)){
+
+            System.out.println("Merkle root method for 2 items worked!");
+        }
+
+        else{
+            System.out.println("Merkle root method for 2 items failed!");
+            System.out.println("Expected: " + sExpectedMerkleRoot_2Items);
+            System.out.println("Received: " + sMerkleRoot);
+
+        }
 
 
         // *** BEGIN TEST 4 ITEMS ***
