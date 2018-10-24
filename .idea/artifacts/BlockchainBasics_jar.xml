@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BlockchainBasics:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BlockchainBasics_jar</output-path>
+    <root id="archive" name="BlockchainBasics.jar">
+      <element id="module-output" name="BlockchainBasics" />
+      <element id="extracted-dir" path="C:/Program Files/Apache Software Foundation/Tomcat 9.0/lib/servlet-api.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

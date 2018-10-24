@@ -29,12 +29,12 @@ public class Miner implements Runnable{
 
         String sDifficulty =""; // create the array
         if(sDifficulty.isEmpty()){
+            // if the difficulty
             while(sDifficulty.length() < oBlock.getDifficulty()){
+                // populate our string with n "0"
                 sDifficulty = "0"+sDifficulty;
             }
         }
-
-
 
         int counter = 0;
         // create the loop that will look for the valid nonce
@@ -51,7 +51,7 @@ public class Miner implements Runnable{
                 // if someone has not mined the block yet!
                 //The nonce should start at 0 before the while loop and increment
                 oBlock.setNonce(String.valueOf(counter));
-                oBlock.computeHash();
+                oBlock.setHash(oBlock.computeHash());
                if(oBlock.getNonce().startsWith(sDifficulty)){
                     return true; // if the user has solved the block and is not mined
                }
